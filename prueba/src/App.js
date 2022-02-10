@@ -1,18 +1,25 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import './App.css';
 import {getMemes } from './redux/actions'
 import { connect } from 'react-redux'
 
 function App({memes,getMemes}) {
-  console.log(memes) 
+  const [memeIndex,setMemeIndex ] = useState(0)
+  function changeMeme(){
+    setMemeIndex(Math.floor( Math.random() * memes.length ))
+  }
   return (
     <div className="App">
      {
        
-       memes && memes.length ? <p>{memes[0].name}</p> : null
+       memes && memes.length ? <div>
+         <p>{memes[memeIndex].name}</p>
+         <img width="200px" src={memes[memeIndex].url} />
+         </div> 
+         : 
+         null
      }
-     <button onClick={getMemes}>MEMES</button>
+     <button onClick={()=>{ changeMeme(); getMemes()}}>MEMES</button>
     </div>
   );
 }
