@@ -1,0 +1,16 @@
+.cnt {
+    padding-top: 10px;
+}
+
+.favoritos {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-fav {
+    margin-left: 10px;
+}
+.fav-img {
+    height: auto;
+    width: 50px;
+}
