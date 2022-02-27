@@ -1,4 +1,4 @@
-import Logo from "../images/logo.png";
+import Logo from "@assets/images/logo.png";
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -9,7 +9,7 @@ const Navbar = () => {
             alt="todo logo"
             className="d-inline-block align-text-top"
             style={{ width: "6rem" }}
-          />          
+          />
         </a>
 
         <button
