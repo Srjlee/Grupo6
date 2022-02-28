@@ -14,6 +14,10 @@ export default defineConfig({
         find: "@assets",
         replacement: path.resolve(__dirname, "./src/assets"),
       },
+      {
+        find: "@redux",
+        replacement: path.resolve(__dirname, "./src/redux"),
+      },
     ],
   },
   plugins: [react()],

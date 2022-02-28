@@ -7,7 +7,7 @@ import {
   PlusIcon,
 } from "@heroicons/react/outline";
 import { useDispatch } from "react-redux";
-import { updateTodo } from "../../redux/actions";
+import { updateTodo } from "@redux/actions";
 import { Tooltip } from "bootstrap";
 
 const ToDoList = ({ title, type, toggle, setDragged, dragged }) => {

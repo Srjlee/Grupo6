@@ -2,7 +2,7 @@ import Logo from "@assets/images/logo.png";
 import { Toast } from "bootstrap";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { removeNotification } from "../../redux/actions";
+import { removeNotification } from "@redux/actions";
 
 const Notification = ({ notification }) => {
   const { id, title, message } = notification;

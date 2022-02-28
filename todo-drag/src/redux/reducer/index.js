@@ -5,7 +5,7 @@ import {
   UPDATE_TODO,
   REMOVE_TODO,
   REMOVE_NOTIFICATION,
-} from "../actions";
+} from "@redux/actions";
 
 const initialState = {
   todos: [],

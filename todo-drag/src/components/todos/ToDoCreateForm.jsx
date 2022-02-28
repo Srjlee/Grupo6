@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo, pushNotification } from "../../redux/actions";
+import { addTodo, pushNotification } from "@redux/actions";
 
 import ToDoForm from "./ToDoForm";
 
