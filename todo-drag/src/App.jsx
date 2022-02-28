@@ -57,6 +57,7 @@ function App() {
       <ToDoForm showForm={showForm} toggleFormShow={toggleFormShow} />
 
       <NotificationContainer />
+      <div className="footer text-muted">AppTodo - Johan Tovar 2022</div>
     </>
   );
 }
