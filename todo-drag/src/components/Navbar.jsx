@@ -1,7 +1,7 @@
 import Logo from "@assets/images/logo.png";
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-info">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">
           <img
@@ -24,7 +24,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
+          <div className="navbar-nav ">
            {/*  <a className="nav-link active" aria-current="page" href="#">
               Home
             </a>
