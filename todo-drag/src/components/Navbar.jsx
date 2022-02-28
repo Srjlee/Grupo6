@@ -25,7 +25,7 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
-            <a className="nav-link active" aria-current="page" href="#">
+           {/*  <a className="nav-link active" aria-current="page" href="#">
               Home
             </a>
             <a className="nav-link" href="#">
@@ -41,7 +41,7 @@ const Navbar = () => {
               aria-disabled="true"
             >
               Disabled
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
