@@ -26,9 +26,26 @@
     transition: visibility 0s .7s, opacity .5s ease-out;
 }
 
+.list-group-item.hidden-icon:hover .icon-wrapper {
+    display: none;
+}
+
+.icon-wrapper {
+    display: none;
+}
+
+.list-group-item:hover .icon-wrapper {
+    display: inline;
+}
+
 .icon {
     width: 1.1rem;
     cursor: pointer;
+}
+
+.icon:hover {
+    color: black;
+    transition: color .3s ease-in-out;
 }
 
 .cursor-move {

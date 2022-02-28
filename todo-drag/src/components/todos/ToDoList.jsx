@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  DocumentRemoveIcon,
-  EyeIcon,
-  PencilIcon,
-  PlusIcon,
-} from "@heroicons/react/outline";
-import { useDispatch } from "react-redux";
-import { updateTodo } from "@redux/actions";
-import { Tooltip } from "bootstrap";
+import { PlusIcon } from "@heroicons/react/outline";
+
+import ToDoListItem from "@components/todos/ToDoListItem";
+import Dropzone from "@components/draggable/Dropzone";
 
 const ToDoList = ({ title, type, toggle, setDragged, dragged }) => {
   const tasks = useSelector((state) =>
     state.todos.filter((todo) => todo.status === type)
   );
   const [todos, updateTodos] = useState(tasks);
-  const dispatch = useDispatch();
+  
 
   const setup = {
     todo: { titleBg: "bg-warning" },
@@ -28,61 +23,6 @@ const ToDoList = ({ title, type, toggle, setDragged, dragged }) => {
       updateTodos(tasks);
     }
   }, [tasks, todos]);
-
-  useEffect(() => {
-    var tooltipTriggerList = [].slice.call(
-      document.querySelectorAll('[data-bs-toggle="tooltip"]')
-    );
-    tooltipTriggerList.map(function (tooltipTriggerEl) {
-      return new Tooltip(tooltipTriggerEl);
-    });
-  }, []);
-
-  const dragStart = (e) => {
-    setDragged({
-      id: e.target.id,
-      type,
-    });
-  };
-
-  const onDragOver = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    const ele = e.target;
-    if (
-      ele.classList.contains("dropzone") &&
-      ele.parentNode.id !== dragged.type
-    ) {
-      ele.parentNode.classList.add("opacity-25");
-    }
-  };
-
-  const onDragEnter = (e) => {
-    const ele = e.target;
-    if (
-      ele.classList.contains("dropzone") &&
-      ele.parentNode.id !== dragged.type
-    ) {
-      ele.parentNode.classList.add("opacity-25");
-    }
-  };
-
-  const onDragLeave = (e) => {
-    const ele = e.target;
-    if (
-      ele.classList.contains("dropzone") &&
-      ele.parentNode.id !== dragged.type
-    ) {
-      ele.parentNode.classList.remove("opacity-25");
-    }
-  };
-
-  const onDrop = (e) => {
-    e.preventDefault();
-    const ele = e.target;
-    dispatch(updateTodo(dragged.id, { status: type }));
-    ele.parentNode.classList.remove("opacity-25");
-  };
 
   return (
     <div className="card">
@@ -100,56 +40,17 @@ const ToDoList = ({ title, type, toggle, setDragged, dragged }) => {
           />
         ) : null}
       </div>
-      <ul
-        id={type}
-        onDragOver={onDragOver}
-        onDragEnter={onDragEnter}
-        onDragLeave={onDragLeave}
-        onDrop={onDrop}
-        className="list-group list-group-flush"
-      >
+      <Dropzone type={type} dragged={dragged}>
         {todos.length ? (
-          todos.map(({ id, task }) => (
-            <li
-              className="dropzone list-group-item list-group-item-action "
-              key={id}
-            >
-              <a
-                id={id}
-                href="#!"
-                onDragStart={dragStart}
-                className="d-flex list-group-item aling-items-center justify-content-between cursor-move"
-              >
-                {task}
-                <span>
-                  <EyeIcon
-                    className="mx-1 icon"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Ver"
-                  />
-                  <PencilIcon
-                    className="mx-1 icon"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Editar"
-                  />
-                  <DocumentRemoveIcon
-                    className="mx-1 icon"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Eliminar"
-                  />
-                </span>
-              </a>
-            </li>
+          todos.map((toDo) => (
+            <ToDoListItem toDo={toDo} setDragged={setDragged} key={toDo.id} />
           ))
         ) : (
-          <div className="dropzone list-group-item bg-transparent">
+          <li className="dropzone list-group-item bg-transparent">
             No existen tareas en esta lista
-          </div>
+          </li>
         )}
-      </ul>
+      </Dropzone>
     </div>
   );
 };
