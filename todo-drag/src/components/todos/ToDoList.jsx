@@ -21,10 +21,27 @@ const ToDoList = ({ title, type, dragged, setDragged }) => {
   };
 
   useEffect(() => {
-    if (tasks.length !== todos.length) {
+    if ((!todos.length && tasks.length) || todos.length !== tasks.length) {
       updateTodos(tasks);
     }
-  }, [tasks]);
+
+    if (tasks.length === todos.length) {
+      let validate = tasks.filter(
+        (task, index) =>
+          task.title !== todos[index].title ||
+          task.description !== todos[index].description
+      );
+
+      if (validate.length) {
+        updateTodos(tasks);
+      }
+    }
+  }, [tasks, todos]);
+
+  useEffect(() => {
+    updateTodos(tasks);
+    return () => updateTodos([]);
+  }, []);
 
   const displayCreateForm = () => {
     dispatch(showCreateForm(true));
