@@ -8,7 +8,7 @@ import {
   SHOW_TODO,
   SHOW_EDIT_TODO,
   SHOW_CREATE_TODO,
-  LOAD_LOCAL_STORAGE
+  LOAD_LOCAL_STORAGE,
 } from "@redux/actions";
 
 const initialState = {
@@ -39,6 +39,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         showEditForm: false,
+        todo: {},
         todos: todos,
       };
     }
@@ -70,7 +71,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case SHOW_TODO: {
       return {
         ...state,
-        todo: state.todos.find((todo) => todo.id === payload),
+        todo: state.todos.find((todo) => todo.id === payload) ?? {},
       };
     }
 
