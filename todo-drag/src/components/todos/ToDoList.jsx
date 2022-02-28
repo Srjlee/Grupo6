@@ -146,7 +146,7 @@ const ToDoList = ({ title, type, toggle, setDragged, dragged }) => {
           ))
         ) : (
           <div className="dropzone list-group-item bg-transparent">
-            No tienes tareas pendientes
+            No existen tareas en esta lista
           </div>
         )}
       </ul>
