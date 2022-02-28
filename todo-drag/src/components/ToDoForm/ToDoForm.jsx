@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../redux/actions";
+import { addTodo, pushNotification } from "../../redux/actions";
 import { CSSTransition } from "react-transition-group";
 
 const ToDoForm = ({ toggleFormShow, showForm }) => {
@@ -9,7 +9,32 @@ const ToDoForm = ({ toggleFormShow, showForm }) => {
   const [toDo, setToDo] = useState(toDoDefault);
   const [wasValidated, setValidationState] = useState(false);
 
-  const btnRef = useRef(null);
+  const successNotification = {
+    type: "success",
+    title: "Agregar Tarea",
+    message: "La tarea ha sido agrega",
+  };
+
+  const close = () => {
+    toggleFormShow(false);
+    pushNotification([]);
+  };
+
+  const addTask = () => {
+    if (!toDo.task || !toDo.description) {
+      setValidationState(true);
+      return;
+    }
+
+    setValidationState(false);
+
+    dispatch(addTodo(toDo));
+    dispatch(pushNotification(successNotification));
+
+    setToDo(toDoDefault);
+    document.querySelector("[name='task']").focus();
+  };
+
   const onChangeHandler = (e) => {
     setToDo({
       ...toDo,
@@ -19,15 +44,7 @@ const ToDoForm = ({ toggleFormShow, showForm }) => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-
-    if (!toDo.task || !toDo.description) {
-      setValidationState(true);
-      return;
-    }
-
-    setValidationState(false);
-    dispatch(addTodo(toDo));
-    setToDo(toDoDefault);
+    addTask();
   };
 
   useEffect(() => {
@@ -35,13 +52,12 @@ const ToDoForm = ({ toggleFormShow, showForm }) => {
       if (e.key === "k" && e.ctrlKey && e.altKey) {
         toggleFormShow(true);
       }
+
       if (e.key === "Escape") {
         toggleFormShow(false);
+        close();
       }
-      if (e.key === "Enter") {
-        e.preventDefault();
-        btnRef.current.click();
-      }
+
       return () => document.removeEventListener("keydown");
     });
   }, []);
@@ -98,23 +114,18 @@ const ToDoForm = ({ toggleFormShow, showForm }) => {
                 <div className="d-flex justify-content-around  gap-2">
                   <button
                     type="button"
-                    onClick={() => toggleFormShow(false)}
+                    onClick={close}
                     className="btn btn-outline-primary btn-block"
                   >
                     Cancelar
                   </button>
-                  <button
-                    ref={btnRef}
-                    type="submit"
-                    className="btn btn-primary btn-block"
-                    de
-                  >
+                  <button type="submit" className="btn btn-primary btn-block">
                     Agregar
                   </button>
                 </div>
               </form>
 
-              <div className="text-center mt-3" >
+              <div className="text-center mt-3">
                 <small className="text-muted">
                   Presiona "Cancelar" o la tecla "Escape" para cerrar
                 </small>
