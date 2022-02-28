@@ -3,21 +3,24 @@ import { useDispatch } from "react-redux";
 import { addTodo, pushNotification } from "@redux/actions";
 
 import ToDoForm from "./ToDoForm";
+import { useSelector } from "react-redux";
+import { createTodo } from "../../redux/actions";
 
-const ToDoCreateForm = ({ isShow, toggler }) => {
+const ToDoCreateForm = () => {
   const toDoDefault = { task: "", description: "" };
-  const dispatch = useDispatch();
-  const [toDo, setToDo] = useState(toDoDefault);
-  const [wasValidated, setValidationState] = useState(false);
   const successNotification = {
     type: "success",
     title: "Agregar Tarea",
     message: "La tarea ha sido agrega",
   };
+  
+  const isShow = useSelector((state) => state.showCreateForm);
+  const dispatch = useDispatch();
+  const [toDo, setToDo] = useState(toDoDefault);
+  const [wasValidated, setValidationState] = useState(false);  
 
   const close = () => {
-    toggler(false);
-    pushNotification([]);
+    dispatch(createTodo(false));    
   };
 
   const onSubmit = () => {
@@ -37,7 +40,7 @@ const ToDoCreateForm = ({ isShow, toggler }) => {
 
   const keydownHandler = (e) => {
     if (e.key === "k" && e.ctrlKey && e.altKey) {
-      toggler(true);
+      dispatch(createTodo(true));
     }
 
     if (e.key === "Escape") {
@@ -45,6 +48,7 @@ const ToDoCreateForm = ({ isShow, toggler }) => {
       close();
     }
   };
+
   useEffect(() => {
     document.addEventListener("keydown", keydownHandler);
     return () => document.removeEventListener("keydown", keydownHandler);
