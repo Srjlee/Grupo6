@@ -5,10 +5,13 @@ import {
 } from "@heroicons/react/outline";
 import { Tooltip } from "bootstrap";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { removeTodo } from "@redux/actions";
 
 const ToDoListItem = ({ toDo, setDragged }) => {
   const { id, task, status } = toDo;
   const [classes, updateClasses] = useState("");
+  const dispatch = useDispatch();
 
   const onDragStart = (e) => {
     setDragged({
@@ -22,13 +25,18 @@ const ToDoListItem = ({ toDo, setDragged }) => {
   const onDragEnd = (e) => {
     updateClasses("bg-transparent");
   };
+
   useEffect(() => {
-    var tooltipTriggerList = [].slice.call(
+    let tooltipTriggerList = [].slice.call(
       document.querySelectorAll('[data-bs-toggle="tooltip"]')
     );
     tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new Tooltip(tooltipTriggerEl);
     });
+    return () => {
+      let tooltips = [].slice.call(document.querySelectorAll(".tooltip"));
+      tooltips.forEach((tooltip) => tooltip.remove());
+    };
   }, []);
 
   return (
@@ -60,6 +68,7 @@ const ToDoListItem = ({ toDo, setDragged }) => {
               data-bs-toggle="tooltip"
               data-bs-placement="top"
               title="Eliminar"
+              onClick={() => dispatch(removeTodo(id))}
             />
           </span>
         </a>

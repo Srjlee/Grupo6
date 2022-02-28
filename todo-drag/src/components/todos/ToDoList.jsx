@@ -11,7 +11,6 @@ const ToDoList = ({ title, type, toggle, setDragged, dragged }) => {
   );
   const [todos, updateTodos] = useState(tasks);
   
-
   const setup = {
     todo: { titleBg: "bg-warning" },
     inProgress: { titleBg: "bg-info" },

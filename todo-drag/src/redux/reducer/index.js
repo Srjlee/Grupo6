@@ -49,9 +49,12 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     }
 
-    /*  case REMOVE_TODO: {
-      return [...state, state.filter((todo) => todo !== payload)];
-    } */
+    case REMOVE_TODO: {
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== payload),
+      };
+    }
     default:
       return state;
   }
