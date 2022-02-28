@@ -4,7 +4,7 @@ import { addTodo, pushNotification } from "@redux/actions";
 
 import ToDoForm from "./ToDoForm";
 import { useSelector } from "react-redux";
-import { createTodo } from "../../redux/actions";
+import { showCreateForm } from "@redux/actions";
 
 const ToDoCreateForm = () => {
   const toDoDefault = { task: "", description: "" };
@@ -20,7 +20,7 @@ const ToDoCreateForm = () => {
   const [wasValidated, setValidationState] = useState(false);  
 
   const close = () => {
-    dispatch(createTodo(false));    
+    dispatch(showCreateForm(false));    
   };
 
   const onSubmit = () => {
@@ -40,7 +40,7 @@ const ToDoCreateForm = () => {
 
   const keydownHandler = (e) => {
     if (e.key === "k" && e.ctrlKey && e.altKey) {
-      dispatch(createTodo(true));
+      dispatch(showCreateForm(true));
     }
 
     if (e.key === "Escape") {

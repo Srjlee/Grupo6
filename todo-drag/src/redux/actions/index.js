@@ -7,12 +7,12 @@ export const SHOW_TODO = "SHOW_TODO";
 export const SHOW_CREATE_TODO = "SHOW_CREATE_TODO";
 export const SHOW_EDIT_TODO = "SHOW_EDIT_TODO";
 
-export const createTodo = (show) => ({
+export const showCreateForm = (show) => ({
   type: SHOW_CREATE_TODO,
   payload: show,
 });
 
-export const editTodo = (id, show) => ({
+export const showEditForm = (id, show) => ({
   type: SHOW_EDIT_TODO,
   payload: { id, show },
 });
