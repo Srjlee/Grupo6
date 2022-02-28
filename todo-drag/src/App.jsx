@@ -29,7 +29,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="container gap-2 mt-5">
+      <div className="container gap-2 pt-4">
         <div className="row">
           <div className="col-12 col-md-4 my-4 my-md-0">
             <ToDoList

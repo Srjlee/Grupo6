@@ -51,9 +51,18 @@
 .cursor-move {
     cursor: move;
 }
-
+.navbar {
+    height: 10vh;;
+}
+.container{
+    min-height: 85vh;    
+}
 .footer {
     font-size: .8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5vh;    
     padding: 1rem 0;    
     text-align: center;
 }
