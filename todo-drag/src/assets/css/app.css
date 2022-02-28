@@ -14,186 +14,16 @@
     align-items: center;
 }
 
-.fade-enter {
-    opacity: 0;
-}
-
-.fade-exit {
-    opacity: 1;
-}
-
-.fade-enter-active {
-    opacity: 1;
-}
-
-.fade-enter-active.overlay>div {
-    opacity: 1;
-}
-
-.fade-exit-active {
-    opacity: 0;
-}
-
-.fade-enter-active,
-.fade-exit-active {
-    transition: opacity 500ms;
-}
-
-.slideInUp {
-    -webkit-animation-name: slideInUp;
-    animation-name: slideInUp;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-}
-
-@-webkit-keyframes slideInUp {
-    0% {
-        -webkit-transform: translateY(100%);
-        transform: translateY(100%);
-        visibility: visible;
-    }
-
-    100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInUp {
-    0% {
-        -webkit-transform: translateY(100%);
-        transform: translateY(100%);
-        visibility: visible;
-    }
-
-    100% {
-        -webkit-transform: translateY(0);
-        transform: translateY(0);
-    }
-}
-
-
 .fade-in {
-    animation: fadeIn linear .5s;
-    -webkit-animation: fadeIn linear .5s;
-    -moz-animation: fadeIn linear .5s;
-    -o-animation: fadeIn linear .5s;
-    -ms-animation: fadeIn linear .5s;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@-moz-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@-webkit-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@-o-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@-ms-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .5s ease-out;
 }
 
 .fade-out {
-    animation: fadeOut linear .5s;
-    -webkit-animation: fadeOut linear .5s;
-    -moz-animation: fadeOut linear .5s;
-    -o-animation: fadeOut linear .5s;
-    -ms-animation: fadeOut linear .5s;
-}
-
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        display: hidden;
-    }
-}
-
-@-moz-keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        display: hidden;
-    }
-}
-
-@-webkit-keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        display: hidden;
-    }
-}
-
-@-o-keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        display: hidden;
-    }
-}
-
-@-ms-keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        display: hidden;
-    }
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s .7s, opacity .5s ease-out;
 }
 
 .icon {
@@ -206,11 +36,10 @@
 }
 
 .footer {
-    
     font-size: .8rem;
     padding: 1rem 0;
     position: fixed;
-    bottom:0;    
+    bottom: 0;
     left: 0;
     right: 0;
     text-align: center;
