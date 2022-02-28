@@ -7,6 +7,7 @@ import Navbar from "@components/Navbar";
 import ToDoForm from "@components/todos/ToDoForm";
 import ToDoList from "./components/todos/ToDoList";
 import NotificationContainer from "@components/notifications/NotificationContainer";
+import ToDoCreateForm from "./components/todos/ToDoCreateForm";
 
 function App() {
   const [showForm, toggleFormShow] = useState(false);
@@ -54,7 +55,7 @@ function App() {
         </div>
       </div>
 
-      <ToDoForm showForm={showForm} toggleFormShow={toggleFormShow} />
+      <ToDoCreateForm isShow={showForm} toggler={toggleFormShow} />
 
       <NotificationContainer />
       <div className="footer text-muted">AppTodo - Johan Tovar 2022</div>
