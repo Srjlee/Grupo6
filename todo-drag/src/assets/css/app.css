@@ -195,3 +195,12 @@
         display: hidden;
     }
 }
+
+.icon {
+    width: 1.1rem;
+    cursor: pointer;
+}
+
+.cursor-move {
+    cursor: move;
+}
