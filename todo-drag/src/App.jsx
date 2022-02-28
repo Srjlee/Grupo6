@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { loadTodoLocalStorage } from "@redux/actions";
 
 import "@assets/css/app.css";
 
@@ -10,11 +11,20 @@ import ToDoCreateForm from "@components/todos/ToDoCreateForm";
 import ToDoEditForm from "@components/todos/ToDoEditForm";
 import ShowTodo from "@components/todos/ShowTodo";
 
-function App() {  
+function App() {
   const [dragged, setDragged] = useState(null);
+  const dispatch = useDispatch();
+
   const TODO = "todo";
   const IN_PROGRESS = "inProgress";
   const DONE = "done";
+
+  useEffect(() => {
+    let toDos = JSON.parse(localStorage.getItem("toDos")) ?? [];
+    if (toDos.length) {
+      dispatch(loadTodoLocalStorage(toDos));
+    }
+  }, []);
 
   return (
     <>

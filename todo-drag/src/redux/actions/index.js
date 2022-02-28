@@ -6,6 +6,7 @@ export const REMOVE_NOTIFICATION = "REMOVE_NOTIFICATION";
 export const SHOW_TODO = "SHOW_TODO";
 export const SHOW_CREATE_TODO = "SHOW_CREATE_TODO";
 export const SHOW_EDIT_TODO = "SHOW_EDIT_TODO";
+export const LOAD_LOCAL_STORAGE = "LOAD_LOCAL_STORAGE";
 
 export const showCreateForm = (show) => ({
   type: SHOW_CREATE_TODO,
@@ -47,4 +48,9 @@ export const pushNotification = (notification) => ({
 
 export const removeNotification = () => ({
   type: REMOVE_NOTIFICATION,
+});
+
+export const loadTodoLocalStorage = (todos) => ({
+  type: LOAD_LOCAL_STORAGE,
+  payload: todos,
 });

@@ -8,6 +8,7 @@ import {
   SHOW_TODO,
   SHOW_EDIT_TODO,
   SHOW_CREATE_TODO,
+  LOAD_LOCAL_STORAGE
 } from "@redux/actions";
 
 const initialState = {
@@ -22,19 +23,23 @@ const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ADD_TODO: {
       const todo = { id: nanoid(), ...payload, status: "todo" };
+      const todos = [...state.todos, todo];
+      localStorage.setItem("toDos", JSON.stringify(todos));
       return {
         ...state,
-        todos: [...state.todos, todo],
+        todos: todos,
       };
     }
 
     case UPDATE_TODO: {
+      const todos = state.todos.map((todo) =>
+        todo.id === payload.id ? { ...todo, ...payload.data } : todo
+      );
+      localStorage.setItem("toDos", JSON.stringify(todos));
       return {
         ...state,
         showEditForm: false,
-        todos: state.todos.map((todo) =>
-          todo.id === payload.id ? { ...todo, ...payload.data } : todo
-        ),
+        todos: todos,
       };
     }
 
@@ -54,9 +59,11 @@ const reducer = (state = initialState, { type, payload }) => {
     }
 
     case REMOVE_TODO: {
+      const todos = state.todos.filter((todo) => todo.id !== payload);
+      localStorage.setItem("toDos", JSON.stringify(todos));
       return {
         ...state,
-        todos: state.todos.filter((todo) => todo.id !== payload),
+        todos: todos,
       };
     }
 
@@ -75,11 +82,18 @@ const reducer = (state = initialState, { type, payload }) => {
     }
 
     case SHOW_EDIT_TODO: {
-      const toDo = state.todos.find((todo) => todo.id === payload.id);      
+      const toDo = state.todos.find((todo) => todo.id === payload.id);
       return {
         ...state,
         todo: toDo !== undefined ? toDo : {},
         showEditForm: payload.show,
+      };
+    }
+
+    case LOAD_LOCAL_STORAGE: {
+      return {
+        ...state,
+        todos: payload,
       };
     }
 
