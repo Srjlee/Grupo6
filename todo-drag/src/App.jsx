@@ -10,6 +10,8 @@ import NotificationContainer from "@components/notifications/NotificationContain
 
 function App() {
   const [showForm, toggleFormShow] = useState(false);
+  const [dragged, setDragged] = useState(null);
+
   const TODO = "todo";
   const IN_PROGRESS = "inProgress";
   const DONE = "done";
@@ -17,17 +19,37 @@ function App() {
   return (
     <>
       <Navbar />
-      <button onClick={() => toggleFormShow(true)}>Open</button>
-      <div className="container gap-2 ">
+      <div className="container gap-2 mt-5">
         <div className="row">
           <div className="col-12 col-md-4 my-4 my-md-0">
-            <ToDoList title="Pendientes" type={TODO} key="todo" />
+            <ToDoList
+              title="Pendientes"
+              type={TODO}
+              toggle={toggleFormShow}
+              setDragged={setDragged}
+              dragged={dragged}
+              key="todo"
+            />
           </div>
           <div className="col-12 col-md-4 my-4 my-md-0">
-            <ToDoList title="Pendientes" type={IN_PROGRESS} key="inProgress" />
+            <ToDoList
+              title="En progreso"
+              type={IN_PROGRESS}
+              toggle={toggleFormShow}
+              setDragged={setDragged}
+              dragged={dragged}
+              key="inProgress"
+            />
           </div>
           <div className="col-12 col-md-4 my-4 my-md-0">
-            <ToDoList title="Pendientes" type={DONE} key="done" />
+            <ToDoList
+              title="Terminados"
+              type={DONE}
+              toggle={toggleFormShow}
+              setDragged={setDragged}
+              dragged={dragged}
+              key="done"
+            />
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { nanoid } from "nanoid";
 import {
   PUSH_NOTIFICATION,
   ADD_TODO,
+  UPDATE_TODO,
   REMOVE_TODO,
   REMOVE_NOTIFICATION,
 } from "../actions";
@@ -18,6 +19,18 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         todos: [...state.todos, todo],
+      };
+    }
+
+    case UPDATE_TODO: {
+      return {
+        ...state,
+        todos: state.todos.map((todo) => {
+          if (todo.id === payload.id) {
+            return { ...todo, ...payload.data };
+          }
+          return todo;
+        }),
       };
     }
 
