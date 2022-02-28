@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import "@assets/css/app.css";
 
 import Navbar from "@components/Navbar";
-import ToDoForm from "@components/todos/ToDoForm";
-import ToDoList from "./components/todos/ToDoList";
+import ToDoList from "@components/todos/ToDoList";
 import NotificationContainer from "@components/notifications/NotificationContainer";
-import ToDoCreateForm from "./components/todos/ToDoCreateForm";
+import ToDoCreateForm from "@components/todos/ToDoCreateForm";
+import ShowTodo from "@components/todos/ShowTodo";
 
 function App() {
   const [showForm, toggleFormShow] = useState(false);
@@ -56,6 +56,8 @@ function App() {
       </div>
 
       <ToDoCreateForm isShow={showForm} toggler={toggleFormShow} />
+      
+      <ShowTodo />
 
       <NotificationContainer />
       <div className="footer text-muted">AppTodo - Johan Tovar 2022</div>

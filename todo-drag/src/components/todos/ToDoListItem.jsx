@@ -6,7 +6,7 @@ import {
 import { Tooltip } from "bootstrap";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { removeTodo } from "@redux/actions";
+import { removeTodo, showTodo } from "@redux/actions";
 
 const ToDoListItem = ({ toDo, setDragged }) => {
   const { id, task, status } = toDo;
@@ -28,7 +28,7 @@ const ToDoListItem = ({ toDo, setDragged }) => {
 
   useEffect(() => {
     let tooltipTriggerList = [].slice.call(
-      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      document.querySelectorAll('[data-bs-tooltip-toggle="tooltip"]')
     );
     tooltipTriggerList.map(function (tooltipTriggerEl) {
       return new Tooltip(tooltipTriggerEl);
@@ -53,19 +53,23 @@ const ToDoListItem = ({ toDo, setDragged }) => {
           <span className="icon-wrapper">
             <EyeIcon
               className="mx-1 icon"
-              data-bs-toggle="tooltip"
+              data-bs-tooltip-toggle="tooltip"
               data-bs-placement="top"
               title="Ver"
+              data-bs-toggle="modal"
+              data-bs-target="#modalScreen"
+              onClick={() => dispatch(showTodo(id))}
             />
             <PencilIcon
               className="mx-1 icon"
-              data-bs-toggle="tooltip"
+              data-bs-tooltip-toggle="tooltip"
               data-bs-placement="top"
               title="Editar"
+              type="button"              
             />
             <DocumentRemoveIcon
               className="mx-1 icon"
-              data-bs-toggle="tooltip"
+              data-bs-tooltip-toggle="tooltip"
               data-bs-placement="top"
               title="Eliminar"
               onClick={() => dispatch(removeTodo(id))}

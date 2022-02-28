@@ -5,11 +5,13 @@ import {
   UPDATE_TODO,
   REMOVE_TODO,
   REMOVE_NOTIFICATION,
+  SHOW_TODO,
 } from "@redux/actions";
 
 const initialState = {
   todos: [],
   notifications: [],
+  todo: "",
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -53,6 +55,13 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         todos: state.todos.filter((todo) => todo.id !== payload),
+      };
+    }
+
+    case SHOW_TODO: {      
+      return {
+        ...state,
+        todo: state.todos.find((todo) => todo.id === payload),
       };
     }
     default:
