@@ -6,12 +6,16 @@ import {
   REMOVE_TODO,
   REMOVE_NOTIFICATION,
   SHOW_TODO,
+  SHOW_EDIT_TODO,
+  SHOW_CREATE_TODO,
 } from "@redux/actions";
 
 const initialState = {
   todos: [],
   notifications: [],
   todo: "",
+  showEditForm: false,
+  showCreateForm: false,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -21,18 +25,17 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         todos: [...state.todos, todo],
+        showCreateForm: false,
       };
     }
 
     case UPDATE_TODO: {
       return {
         ...state,
-        todos: state.todos.map((todo) => {
-          if (todo.id === payload.id) {
-            return { ...todo, ...payload.data };
-          }
-          return todo;
-        }),
+        showEditForm: false,
+        todos: state.todos.map((todo) =>
+          todo.id === payload.id ? { ...todo, ...payload.data } : todo
+        ),
       };
     }
 
@@ -58,12 +61,28 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     }
 
-    case SHOW_TODO: {      
+    case SHOW_TODO: {
       return {
         ...state,
         todo: state.todos.find((todo) => todo.id === payload),
       };
     }
+
+    case SHOW_CREATE_TODO: {
+      return {
+        ...state,
+        showCreateForm: payload,
+      };
+    }
+
+    case SHOW_EDIT_TODO: {
+      return {
+        ...state,
+        todo: state.todos.find((todo) => todo.id === payload.id),
+        showEditForm: payload.show,
+      };
+    }
+
     default:
       return state;
   }
