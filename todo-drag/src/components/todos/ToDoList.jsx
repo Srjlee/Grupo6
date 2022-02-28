@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { PlusIcon } from "@heroicons/react/outline";
+import { showCreateForm } from "@redux/actions";
+import { useDispatch } from "react-redux";
 
 import ToDoListItem from "@components/todos/ToDoListItem";
 import Dropzone from "@components/draggable/Dropzone";
 
-const ToDoList = ({ title, type, toggle, setDragged, dragged }) => {
+const ToDoList = ({ title, type, dragged, setDragged }) => {
+  const dispatch = useDispatch();
   const tasks = useSelector((state) =>
     state.todos.filter((todo) => todo.status === type)
   );
   const [todos, updateTodos] = useState(tasks);
-  
+
   const setup = {
     todo: { titleBg: "bg-warning" },
     inProgress: { titleBg: "bg-info" },
@@ -21,7 +24,11 @@ const ToDoList = ({ title, type, toggle, setDragged, dragged }) => {
     if (tasks.length !== todos.length) {
       updateTodos(tasks);
     }
-  }, [tasks, todos]);
+  }, [tasks]);
+
+  const displayCreateForm = () => {
+    dispatch(showCreateForm(true));
+  };
 
   return (
     <div className="card">
@@ -31,7 +38,7 @@ const ToDoList = ({ title, type, toggle, setDragged, dragged }) => {
         {title}
         {type === "todo" ? (
           <PlusIcon
-            onClick={toggle}
+            onClick={displayCreateForm}
             className="mx-1 icon"
             data-bs-toggle="tooltip"
             data-bs-placement="top"

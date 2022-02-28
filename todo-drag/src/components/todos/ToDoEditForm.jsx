@@ -1,6 +1,15 @@
-const ToDoEditForm = ({ id, isShow, toggler }) => {
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTodo, pushNotification, showEditForm } from "@redux/actions";
+
+import ToDoForm from "./ToDoForm";
+
+const ToDoEditForm = () => {
   const dispatch = useDispatch();
-  const [toDo, setToDo] = useState(toDo);
+  const toDoDefault = { task: "", description: "" };
+  const stateToDo = useSelector((state) => state.todo);
+  const isShow = useSelector((state) => state.showEditForm);
+  const [toDo, setToDo] = useState(toDoDefault);
   const [wasValidated, setValidationState] = useState(false);
   const successNotification = {
     type: "success",
@@ -9,7 +18,7 @@ const ToDoEditForm = ({ id, isShow, toggler }) => {
   };
 
   const close = () => {
-    toggler(false);
+    dispatch(showEditForm("", false));
   };
 
   const onSubmit = () => {
@@ -17,32 +26,30 @@ const ToDoEditForm = ({ id, isShow, toggler }) => {
       setValidationState(true);
       return;
     }
-
     setValidationState(false);
-
-    dispatch(updateTodo(id, toDo));
+    dispatch(updateTodo(toDo.id, toDo));
     dispatch(pushNotification(successNotification));
-
-    setToDo([]);
     close();
   };
-
-  useEffect(() => {
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        toggler(false);
-        close();
-      }
-    });
-    return () => document.removeEventListener("keydown");
-  }, []);
+  const onKeydown = (e) => {
+    if (e.key === "Escape") {
+      close();
+    }
+  };
+  useEffect(() => {    
+    if (stateToDo.id) {
+      setToDo(stateToDo);
+    }
+    document.addEventListener("keydown", onKeydown);
+    return () => document.removeEventListener("keydown", onKeydown);
+  }, [stateToDo]);
 
   return (
     <div className={`initial-fade ${isShow ? "fade-in" : "fade-out"}`}>
       <div className="wrapper-modal">
         <div className="overlay"></div>
         <div className="card col-10 col-md-6 col-lg-4 mx-auto shadow-lg">
-          <h5 className="card-header bg-primary text-light">Agregar Tarea</h5>
+          <h5 className="card-header bg-primary text-light">Editar Tarea</h5>
           <div className="card-body">
             <ToDoForm
               toDo={toDo}

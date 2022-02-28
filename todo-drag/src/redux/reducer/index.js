@@ -13,7 +13,7 @@ import {
 const initialState = {
   todos: [],
   notifications: [],
-  todo: "",
+  todo: {},
   showEditForm: false,
   showCreateForm: false,
 };
@@ -25,7 +25,6 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         todos: [...state.todos, todo],
-        showCreateForm: false,
       };
     }
 
@@ -76,9 +75,10 @@ const reducer = (state = initialState, { type, payload }) => {
     }
 
     case SHOW_EDIT_TODO: {
+      const toDo = state.todos.find((todo) => todo.id === payload.id);      
       return {
         ...state,
-        todo: state.todos.find((todo) => todo.id === payload.id),
+        todo: toDo !== undefined ? toDo : {},
         showEditForm: payload.show,
       };
     }

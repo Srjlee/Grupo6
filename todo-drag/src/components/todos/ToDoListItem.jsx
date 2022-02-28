@@ -6,7 +6,7 @@ import {
 import { Tooltip } from "bootstrap";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { removeTodo, showTodo } from "@redux/actions";
+import { removeTodo, showTodo, showEditForm } from "@redux/actions";
 
 const ToDoListItem = ({ toDo, setDragged }) => {
   const { id, task, status } = toDo;
@@ -39,6 +39,10 @@ const ToDoListItem = ({ toDo, setDragged }) => {
     };
   }, []);
 
+  const editTodo = () => {
+    dispatch(showEditForm(id, true));
+  };
+
   return (
     <>
       <li className="list-group-item list-group-item-action bg-transparent">
@@ -65,7 +69,8 @@ const ToDoListItem = ({ toDo, setDragged }) => {
               data-bs-tooltip-toggle="tooltip"
               data-bs-placement="top"
               title="Editar"
-              type="button"              
+              type="button"
+              onClick={editTodo}
             />
             <DocumentRemoveIcon
               className="mx-1 icon"

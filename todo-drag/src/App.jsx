@@ -7,12 +7,11 @@ import Navbar from "@components/Navbar";
 import ToDoList from "@components/todos/ToDoList";
 import NotificationContainer from "@components/notifications/NotificationContainer";
 import ToDoCreateForm from "@components/todos/ToDoCreateForm";
+import ToDoEditForm from "@components/todos/ToDoEditForm";
 import ShowTodo from "@components/todos/ShowTodo";
 
-function App() {
-  const [showForm, toggleFormShow] = useState(false);
+function App() {  
   const [dragged, setDragged] = useState(null);
-
   const TODO = "todo";
   const IN_PROGRESS = "inProgress";
   const DONE = "done";
@@ -26,7 +25,6 @@ function App() {
             <ToDoList
               title="Pendientes"
               type={TODO}
-              toggle={toggleFormShow}
               setDragged={setDragged}
               dragged={dragged}
               key="todo"
@@ -36,7 +34,6 @@ function App() {
             <ToDoList
               title="En progreso"
               type={IN_PROGRESS}
-              toggle={toggleFormShow}
               setDragged={setDragged}
               dragged={dragged}
               key="inProgress"
@@ -46,7 +43,6 @@ function App() {
             <ToDoList
               title="Terminados"
               type={DONE}
-              toggle={toggleFormShow}
               setDragged={setDragged}
               dragged={dragged}
               key="done"
@@ -55,8 +51,10 @@ function App() {
         </div>
       </div>
 
-      <ToDoCreateForm isShow={showForm} toggler={toggleFormShow} />
-      
+      <ToDoCreateForm />
+
+      <ToDoEditForm />
+
       <ShowTodo />
 
       <NotificationContainer />

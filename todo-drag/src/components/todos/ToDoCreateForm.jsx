@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo, pushNotification } from "@redux/actions";
+import { addTodo, pushNotification, showCreateForm } from "@redux/actions";
+import { useSelector } from "react-redux";
 
 import ToDoForm from "./ToDoForm";
-import { useSelector } from "react-redux";
-import { showCreateForm } from "@redux/actions";
 
 const ToDoCreateForm = () => {
   const toDoDefault = { task: "", description: "" };
@@ -13,14 +12,14 @@ const ToDoCreateForm = () => {
     title: "Agregar Tarea",
     message: "La tarea ha sido agrega",
   };
-  
+
   const isShow = useSelector((state) => state.showCreateForm);
   const dispatch = useDispatch();
   const [toDo, setToDo] = useState(toDoDefault);
-  const [wasValidated, setValidationState] = useState(false);  
+  const [wasValidated, setValidationState] = useState(false);
 
   const close = () => {
-    dispatch(showCreateForm(false));    
+    dispatch(showCreateForm(false));
   };
 
   const onSubmit = () => {
@@ -44,7 +43,6 @@ const ToDoCreateForm = () => {
     }
 
     if (e.key === "Escape") {
-      toggler(false);
       close();
     }
   };
